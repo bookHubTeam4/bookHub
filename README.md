@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -23,6 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-=======
-# bookHub
->>>>>>> 9738327a478c630c32176e554c9231d590dfae33
