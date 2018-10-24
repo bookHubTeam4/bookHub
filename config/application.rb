@@ -31,7 +31,7 @@ module BookhubApi
     config.api_only = true
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'localhost:3000', /https*:\/\/.*?bloopist\.com/
+        origins '*'
         resource '*', :headers => :any, :methods => :any
       end
     end
