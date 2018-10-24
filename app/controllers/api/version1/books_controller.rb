@@ -55,6 +55,36 @@ class BooksController < ApplicationController
     
     end
 
+    def show
+        @isbn = params[:name]
+        #book_data = {}
+
+        
+            Rails.logger.info(params[:name])
+           
+            book = Book.api_call(@isbn)
+            book_volume_info = book['volumeInfo']
+            authors = book['authors'] if book
+            authors_string = authors.join(', ') if authors
+            google_id = book['id']
+            book_data = { title: book_volume_info['title'],
+                          author: authors_string,
+                          description: book_volume_info['description'],
+                          genre_id: 20,
+                          google_id: google_id,
+                          page_count: book_volume_info['pageCount'],
+                          average_rating: book_volume_info['averageRating'],
+                          published_date: book_volume_info['publishedDate'],
+                          publisher: book_volume_info['publisher'] }
+        
+      
+
+    
+
+        render json: {book: book_data, status: 'success'}
+
+    end
+
 end
 end
 end
