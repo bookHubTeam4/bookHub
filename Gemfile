@@ -16,6 +16,9 @@ gem 'puma', '~> 3.7'
 
 gem 'httparty'
 
+gem 'rack-cors', :require => 'rack/cors'
+
+
 gem 'simple_token_authentication', '~> 1.0' # see semver.org
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
