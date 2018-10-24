@@ -1,3 +1,4 @@
+
 class Api::Version1::UsersController < ApplicationController
 
     def create
