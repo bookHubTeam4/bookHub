@@ -9,4 +9,8 @@ class User < ApplicationRecord
     # Validations ...
     validates :email, presence: true
     validates :password, presence: true
+
+    def valid_password?(pass)
+        pass.eql? password
+   end
 end

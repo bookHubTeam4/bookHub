@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     namespace 'version1' do
       resources :books, only: [:index, :show],  param: :name
       resources :users, only: [:create]
+      resources :sessions, only: [:create, :destroy]     
+
      post 'book/search' => 'books#search_book', param: :search
     end
   end
