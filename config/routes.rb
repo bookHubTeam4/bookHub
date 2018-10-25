@@ -5,11 +5,13 @@ Rails.application.routes.draw do
     namespace 'version1' do
       resources :books, only: [:index, :show],  param: :name
       resources :users, only: [:create]
-      resources :sessions, only: [:create, :destroy]     
+      resources :sessions, only: [:create]
+      delete 'sessions/sign_out'
+     
 
      post 'book/search' => 'books#search_book', param: :search
+     post 'auth/request', to:'authorization#get_authorization'
     end
   end
-
-
+  
 end
