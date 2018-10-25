@@ -64,10 +64,12 @@ class BooksController < ApplicationController
            
             book = Book.api_call(@isbn)
             book_volume_info = book['volumeInfo']
-            authors = book['authors'] if book
+            authors = book_volume_info['authors'] if book
+            Rails.logger.info(book_volume_info['authors'])
             authors_string = authors.join(', ') if authors
             google_id = book['id']
             book_data = { title: book_volume_info['title'],
+                          isbn: @isbn,
                           author: authors_string,
                           description: book_volume_info['description'],
                           genre_id: 20,
