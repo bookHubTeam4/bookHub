@@ -69,7 +69,7 @@ class BooksController < ApplicationController
             authors_string = authors.join(', ') if authors
             google_id = book['id']
             book_data = { title: book_volume_info['title'],
-                          isbn: @isbn
+                          isbn: @isbn,
                           author: authors_string,
                           description: book_volume_info['description'],
                           genre_id: 20,
