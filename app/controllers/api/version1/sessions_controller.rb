@@ -8,7 +8,8 @@ class Api::Version1::SessionsController < ApplicationController
     end     
   end
 
-  def destroy
-    
+  def sign_out
+    render json: {authentication_token: nil}, status: status
   end
+
 end
