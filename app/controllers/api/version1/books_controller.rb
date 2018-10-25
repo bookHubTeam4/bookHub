@@ -72,6 +72,7 @@ class BooksController < ApplicationController
                           isbn: @isbn,
                           author: authors_string,
                           description: book_volume_info['description'],
+                          image_url: book_volume_info['imageLinks']['thumbnail'],
                           genre_id: 20,
                           google_id: google_id,
                           page_count: book_volume_info['pageCount'],
