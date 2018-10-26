@@ -35,5 +35,7 @@ module BookhubApi
         resource '*', :headers => :any, :methods => :any
       end
     end
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
