@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181023173245) do
+ActiveRecord::Schema.define(version: 20181026161616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,16 +45,27 @@ ActiveRecord::Schema.define(version: 20181023173245) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_books", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_user_books_on_book_id"
+    t.index ["user_id"], name: "index_user_books_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
-    t.string "address"
     t.string "imageUrl"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "authentication_token", limit: 30
     t.string "email"
     t.string "password"
+    t.string "provider"
+    t.string "uid"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
   end
 
