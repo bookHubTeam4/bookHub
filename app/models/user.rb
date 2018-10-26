@@ -9,6 +9,8 @@ class User < ApplicationRecord
     # Validations ...
     validates :email, presence: true, uniqueness: true
     validates :password, presence: true
+    validates :firstName, presence: true
+    validates :lastName, presence: true
 
     # methods ...
     def valid_password?(pass)
