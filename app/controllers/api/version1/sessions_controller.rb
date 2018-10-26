@@ -4,7 +4,7 @@ class Api::Version1::SessionsController < ApplicationController
     if user&.valid_password?(params[:password])
         render json: user.as_json, status: :created
     else
-        head(:unauthorized)
+        render json: {error: "Invalid Credentials"}
     end     
   end
 
