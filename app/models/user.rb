@@ -2,7 +2,8 @@ class User < ApplicationRecord
     acts_as_token_authenticatable
 
     # Assosiations ...
-    has_many :books
+    has_many :user_books
+    has_many :books, through: :user_books
     has_many :comments
     has_many :ratings
 
