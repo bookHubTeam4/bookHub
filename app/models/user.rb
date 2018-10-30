@@ -18,17 +18,17 @@ class User < ApplicationRecord
         pass.eql? password
    end
 
-   def self.create_user_for_google(data)
-      user = User.new
-      user.provider = 'Google'
-      user.firstName = data['given_name']
-      user.lastName = data['family_name']
-      user.uid = data['email']
-      user.email = data['email']
-      user.password = 'password'
-      user.save!
-      return user
-    end
+    def self.create_user_for_google(data)                  
+      where(uid: data['email']).first_or_initialize.tap do |user|
+        user.provider = 'Google'
+        user.firstName = data['given_name']
+        user.lastName = data['family_name']
+        user.uid = data['email']
+        user.email = data['email']
+        user.password = 'password' if user.password.nil?
+        user.save!
+      end
+    end  
 
 
     # whether user present or not
