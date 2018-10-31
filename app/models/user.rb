@@ -6,6 +6,8 @@ class User < ApplicationRecord
     has_many :books, through: :user_books
     has_many :comments
     has_many :ratings
+    has_many :user_genres
+    has_many :genres, through: :user_genres
 
     # Validations ...
     validates :email, presence: true, uniqueness: true
