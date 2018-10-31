@@ -88,6 +88,10 @@ class BooksController < ApplicationController
 
     end
 
+    def book_list
+    
+    end
+
 end
 end
 end
