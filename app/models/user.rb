@@ -42,4 +42,12 @@ class User < ApplicationRecord
       User.where(authentication_token: token).first if User.present?(token)
     end
 
+    def add_genre(genre_names)
+      self.genres.destroy_all
+      genre_names.each do |genre_name|
+        genre = Genre.find_by_name(genre_name)
+        self.genres << genre if genre
+      end
+    end
+
 end
