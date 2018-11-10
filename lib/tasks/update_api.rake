@@ -8,6 +8,7 @@ namespace :update_api do
     puts 'Updating NY Times List book data...'
 
     nytimes_key = Figaro.env.nytimes_key
+
     @response = HTTParty.get("https://api.nytimes.com/svc/books/v3/lists.json?api-key=#{nytimes_key}&list=mass-market-paperback")
     @response_travel = HTTParty.get("https://api.nytimes.com/svc/books/v3/lists.json?api-key=#{nytimes_key}&list=travel")
     @response_science = HTTParty.get("https://api.nytimes.com/svc/books/v3/lists.json?api-key=#{nytimes_key}&list=science")
@@ -54,7 +55,8 @@ namespace :update_api do
     genres.each do |genre|
       name = genre.name
       id = genre.id
-      response = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=subject=#{name}&key=#{ENV['GBOOKS_KEY']}")
+      google_key = Figaro.env.google_key
+      response = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=subject=#{name}&key=#{google_key}")
       items = response.parsed_response['items']
 
       items.each do |item|
