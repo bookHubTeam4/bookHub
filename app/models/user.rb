@@ -6,6 +6,8 @@ class User < ApplicationRecord
     has_many :books, through: :user_books
     has_many :comments
     has_many :ratings
+    has_many :user_genres
+    has_many :genres, through: :user_genres
 
     # Validations ...
     validates :email, presence: true, uniqueness: true
@@ -38,6 +40,14 @@ class User < ApplicationRecord
 
     def self.get_user(token)
       User.where(authentication_token: token).first if User.present?(token)
+    end
+
+    def add_genre(genre_names)
+      self.genres.destroy_all
+      genre_names.each do |genre_name|
+        genre = Genre.find_by_name(genre_name)
+        self.genres << genre if genre
+      end
     end
 
 end
