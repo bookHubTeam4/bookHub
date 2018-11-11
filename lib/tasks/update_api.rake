@@ -35,19 +35,23 @@ namespace :update_api do
         @result = result
         @isbn = result['book_details'][0]['primary_isbn10']
         @list = result['list_name']
+      
         if @isbn
-          @book = Book.find_or_api_call(@isbn)
-          if @book == 'Book not found'
-          @book = Book.new_book_data(isbn)
+          @book = Book.book_selector(@isbn)
+          if !@book
+          @book = Book.new_book_data(@isbn)
+          bb = Book.new(@book)
+          bb.ny_times_list = @list
+          else
+             bb = @book
+             bb.ny_times_list = @list
           end
         else
           next
         end
-        @book['ny_times_list'] = @list
-        bb = Book.new
-        bb = @book
+       
         bb.save
-        puts @book.title + ' found or created.'
+        puts bb.bName + ' found or created.'
       end
     end
   end
@@ -90,10 +94,10 @@ namespace :update_api do
                                bName: info['title'],
                                bAuthor: authors,
                                description: info['description'],
-                               image_url: info['imageLinks']['thumbnail'],
+                               #image_url: info['imageLinks']['thumbnail'],
                                genre_id: id
                                )
-            puts book.title + ' created.'
+            puts book.bName + ' created.'
           end
         end
       end

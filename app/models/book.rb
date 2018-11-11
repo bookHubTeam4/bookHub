@@ -42,7 +42,7 @@ class Book < ApplicationRecord
         google_id = book['id']
         book_data = {bName: book_volume_info['title'],
                     isbn: isbn,
-                    bAuthors: authors,
+                    bAuthor: authors,
                     description: book_volume_info['description'],
                     #image_url: book_volume_info['imageLinks']['thumbnail'],
                     genre_id: 20,
