@@ -67,5 +67,9 @@ class User < ApplicationRecord
       user_data["favourite_genres"] = self.genres.pluck(:name)
       user_data
     end
+    
+    # def add_book_to_shelf
+    #   self.books << 
+    # end
 
 end
