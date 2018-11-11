@@ -58,10 +58,7 @@ class BooksController < ApplicationController
     def show
         @isbn = params[:name]
         #book_data = {}
-
-        
-            Rails.logger.info(params[:name])
-           
+            Rails.logger.info(params[:name])          
             book = Book.api_call(@isbn)
             book_volume_info = book['volumeInfo']
             authors = book_volume_info['authors'] if book
@@ -79,10 +76,6 @@ class BooksController < ApplicationController
                           average_rating: book_volume_info['averageRating'],
                           published_date: book_volume_info['publishedDate'],
                           publisher: book_volume_info['publisher'] }
-        
-      
-
-    
 
         render json: {book: book_data, status: 'success'}
 
