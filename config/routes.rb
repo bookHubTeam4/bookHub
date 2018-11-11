@@ -14,7 +14,8 @@ Rails.application.routes.draw do
      
 
      post 'book/search' => 'books#search_book', param: :search
-     post 'auth/request', to:'authorization#get_authorization'
+    #  post 'auth/request', to:'authorization#get_authorization'
+     post 'auth/request', to: 'users#oauth_signup'
     end
   end
   
