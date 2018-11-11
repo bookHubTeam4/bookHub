@@ -20,13 +20,25 @@ class User < ApplicationRecord
         pass.eql? password
    end
 
-    def self.create_user_for_google(data)                  
-      where(uid: data['email']).first_or_initialize.tap do |user|
-        user.provider = 'Google'
-        user.firstName = data['given_name']
-        user.lastName = data['family_name']
-        user.uid = data['email']
-        user.email = data['email']
+    # def self.create_user_for_google(data)                  
+    #   where(uid: data['email']).first_or_initialize.tap do |user|
+    #     user.provider = 'Google'
+    #     user.firstName = data['given_name']
+    #     user.lastName = data['family_name']
+    #     user.uid = data['email']
+    #     user.email = data['email']
+    #     user.password = 'password' if user.password.nil?
+    #     user.save!
+    #   end
+    # end  
+
+    def self.oauth_register(data)                  
+      where(uid: data['emailId']).first_or_initialize.tap do |user|
+        user.provider = data['provider']
+        user.firstName = data['firstName']
+        user.lastName = data['lastName']
+        user.uid = data['emailId']
+        user.email = data['emailId']
         user.password = 'password' if user.password.nil?
         user.save!
       end
@@ -49,5 +61,15 @@ class User < ApplicationRecord
         self.genres << genre if genre
       end
     end
+
+    def full_data
+      user_data = self.attributes
+      user_data["favourite_genres"] = self.genres.pluck(:name)
+      user_data
+    end
+    
+    # def add_book_to_shelf
+    #   self.books << 
+    # end
 
 end

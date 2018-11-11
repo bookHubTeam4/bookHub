@@ -1,8 +1,8 @@
 class Api::Version1::GenresController < ApplicationController
 
   def index
-    genres = Genre.all.pluck(:name)
-    render json: genres
+    genres = Genre.available_genres
+    render json: {genres: genres}
   end
 
   def add_user_favourite_genres
@@ -14,9 +14,9 @@ class Api::Version1::GenresController < ApplicationController
     else
       genres = JSON.parse(params[:genres])
       user.add_genre(genres)
-      render status: 200, json: {
+      render json: {
         message: "Successfully added favourite genres.",
-        favourite_genres: user.genres.pluck(:name)
+        user: user.full_data
       }
     end
 
