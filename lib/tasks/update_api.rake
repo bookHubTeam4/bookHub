@@ -37,11 +37,16 @@ namespace :update_api do
         @list = result['list_name']
         if @isbn
           @book = Book.find_or_api_call(@isbn)
+          if @book == 'Book not found'
+          @book = Book.new_book_data(isbn)
+          end
         else
           next
         end
-        @book.ny_times_list = @list
-        @book.save
+        @book['ny_times_list'] = @list
+        bb = Book.new
+        bb = @book
+        bb.save
         puts @book.title + ' found or created.'
       end
     end

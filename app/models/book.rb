@@ -38,19 +38,24 @@ class Book < ApplicationRecord
         book = Book.api_call(isbn)
         book_volume_info = book['volumeInfo']
         authors = book['authors'] if book
-        authors_string = authors.join(', ') if authors
+        #authors_string = authors.join(', ') if authors
         google_id = book['id']
-        book_data = {title: book_volume_info['title'],
+        book_data = {bName: book_volume_info['title'],
                     isbn: isbn,
-                    author: authors_string,
+                    bAuthors: authors,
                     description: book_volume_info['description'],
-                    image_url: book_volume_info['imageLinks']['thumbnail'],
+                    #image_url: book_volume_info['imageLinks']['thumbnail'],
                     genre_id: 20,
-                    google_id: google_id,
-                    page_count: book_volume_info['pageCount'],
-                    average_rating: book_volume_info['averageRating'],
-                    published_date: book_volume_info['publishedDate'],
-                    publisher: book_volume_info['publisher'] }
+                   #google_id: google_id,
+                    ny_times_list: '',
+                    #page_count: book_volume_info['pageCount'],
+                    #average_rating: book_volume_info['averageRating'],
+                    #published_date: book_volume_info['publishedDate'],
+                    #publisher: book_volume_info['publisher']
+                 }
+
+
+                    puts ".......................#{book_data}"
         return book_data
     end
 end
