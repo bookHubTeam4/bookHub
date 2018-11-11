@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20181031010952) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ny_times_list"
     t.bigint "genre_id"
     t.index ["genre_id"], name: "index_books_on_genre_id"
   end
