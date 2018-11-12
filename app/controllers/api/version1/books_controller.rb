@@ -82,6 +82,7 @@ class BooksController < ApplicationController
     end
 
     def book_list
+      @books = {}
       if User.present?(params[:authentication_token])
         user = User.get_user(params[:authentication_token])
         @genreList = user.genres
