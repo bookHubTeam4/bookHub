@@ -94,7 +94,7 @@ namespace :update_api do
                                bName: info['title'],
                                bAuthor: authors,
                                description: info['description'],
-                               #image_url: info['imageLinks']['thumbnail'],
+                               image_url: info['imageLinks']['thumbnail'],
                                genre_id: id
                                )
             puts book.bName + ' created.'
