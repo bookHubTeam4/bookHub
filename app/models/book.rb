@@ -33,6 +33,8 @@ class Book < ApplicationRecord
         book = Book.find_by(isbn: isbn)
         if book
           return book
+        else
+          return false
         end
     end
 
