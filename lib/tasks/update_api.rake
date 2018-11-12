@@ -63,6 +63,7 @@ namespace :update_api do
     genres = Genre.all
 
     genres.each do |genre|
+      Rails.logger.info(".................................................#{genre}")
       name = genre.name
       id = genre.id
       google_key = Figaro.env.google_key
@@ -70,7 +71,7 @@ namespace :update_api do
       items = response.parsed_response['items']
 
       items.each do |item|
-        Rails.logger.info(".................................................#{item}")
+        
         identifiers = item['volumeInfo']['industryIdentifiers']
         isbn = nil
 
@@ -87,7 +88,6 @@ namespace :update_api do
         else
           if Book.exists?(isbn)
             Rails.logger.info(".................................................#{isbn}")
-            next
           else
             info = item['volumeInfo']
             authors = info['authors']
