@@ -90,8 +90,11 @@ namespace :update_api do
           if Book.exists?(isbn)
             Rails.logger.info(".................................................#{isbn}")
           else
+
             info = item['volumeInfo']
             authors = info['authors']
+
+            Rails.logger.info(".....................#{authors}............................#{info}")
            
             # google_id = response.parsed_response['items'][item]['id']
             book = Book.create(isbn: isbn,
