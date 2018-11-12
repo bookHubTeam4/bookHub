@@ -87,7 +87,8 @@ class BooksController < ApplicationController
         @genreList = user.genres
         if @genreList.any?
           @genreList.each do |genere|
-            @book[genere] = Genre.find_by_name(genere).books.limit(10)
+            @books[genere] = Genre.find_by_name(genere).books.limit(10)
+            Rails.logger.info(Genre.find_by_name(genere).books) 
           end
         
         else

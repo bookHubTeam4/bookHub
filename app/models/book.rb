@@ -3,6 +3,7 @@ class Book < ApplicationRecord
     has_many :users, through: :user_books
     has_many :comments
     has_many :ratings
+    belongs_to :genre
 
 
     def self.book_selector(isbn)
