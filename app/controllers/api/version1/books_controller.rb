@@ -86,6 +86,7 @@ class BooksController < ApplicationController
       if User.present?(params[:authentication_token])
         user = User.get_user(params[:authentication_token])
         @genreList = user.genres
+        Rails.logger.info(@genreList)
         if @genreList.any?
           @genreList.each do |genere|
             @books[genere] = Genre.find_by_name(genere).books.limit(10)
