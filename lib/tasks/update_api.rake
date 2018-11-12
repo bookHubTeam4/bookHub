@@ -28,7 +28,7 @@ namespace :update_api do
     @items << @response_education.parsed_response['results']
     @items << @response_nonfiction.parsed_response['results']
     puts 'Starting'
-
+    Rails.logger.info(".................................................#{@items}")
     @items.each do |item|
       @item = item
       item.each do |result|
