@@ -70,6 +70,7 @@ namespace :update_api do
       items = response.parsed_response['items']
 
       items.each do |item|
+        Rails.logger.info(".................................................#{item}")
         identifiers = item['volumeInfo']['industryIdentifiers']
         isbn = nil
 
@@ -85,6 +86,7 @@ namespace :update_api do
           next
         else
           if Book.exists?(isbn)
+            Rails.logger.info(".................................................#{isbn}")
             next
           else
             info = item['volumeInfo']
