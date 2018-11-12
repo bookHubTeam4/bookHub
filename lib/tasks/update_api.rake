@@ -86,6 +86,7 @@ namespace :update_api do
         if isbn == nil
           next
         else
+          Rails.logger.info(".................................................#{Book.exists?(isbn)}")
           if Book.exists?(isbn)
             Rails.logger.info(".................................................#{isbn}")
           else
