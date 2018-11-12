@@ -20,6 +20,7 @@ namespace :update_api do
     @response_nonfiction = HTTParty.get("https://api.nytimes.com/svc/books/v3/lists.json?api-key=#{nytimes_key}&list=sports")
 
     @items = []
+    Rails.logger.info(".................................................#{@response}")
     @items << @response.parsed_response['results']
     @items << @response_travel.parsed_response['results']
     @items << @response_science.parsed_response['results']
