@@ -82,7 +82,27 @@ class BooksController < ApplicationController
     end
 
     def book_list
-    
+      if User.present?(params[:authentication_token])
+        user = User.get_user(params[:authentication_token])
+        @genreList = user.genres
+        if @genreList.any?
+          @genreList.each do |genere|
+            @book[genere] = Genre.find_by_name(genere).books.limit(10)
+          end
+        
+        else
+          @books_top        = Book.where('ny_times_list = ?', 'Mass Market Paperback')
+          @books_travel     = Book.where('ny_times_list = ?', 'Travel')
+          @books_science    = Book.where('ny_times_list = ?', 'Science')
+          @books_business   = Book.where('ny_times_list = ?', 'Business Books')
+          @books_animals    = Book.where('ny_times_list = ?', 'Animals')
+          @books_education  = Book.where('ny_times_list = ?', 'Education')
+          @books_nonfiction = Book.where('ny_times_list = ?', 'Hardcover Nonfiction')
+          @books = { 'Top Selling' => @books_top, 'Nonfiction' => @books_nonfiction, 'Travel' => @books_travel, 'Science' => @books_science, 'Business' => @books_business, 'Animals' => @books_animals, 'Education' => @books_education }
+
+        end
+      end
+      render json: {book: @books, status: 'success'}
     end
 
 end
