@@ -29,9 +29,27 @@ class Api::Version1::UsersController < ApplicationController
             else
                render json: {errors: @user.errors.full_messages}
             end 
+        end    
+     end
+
+     def add_to_shelf
+        if params[:status] && params[:isbn] && params[:user_token]
+          user = User.get_user(params[:user_token])
+          Rails.logger.info("......user - #{user.id}")
+          book = Book.exists?(params[:isbn])
+          unless book
+            book_info = Book.required_info(params[:isbn])   
+            book = Book.create(book_info.merge(genre_id: Genre.get_misc.id))
+          end 
+          Rails.logger.info("......book - #{book.id}")         
+          user.books << book unless UserBook.present?(user.id, book.id)
+          user_book = UserBook.find_by(user: user, book: book)
+          Rails.logger.info("......user_book - #{user_book.id}")
+          user_book.update(status: params[:status].to_i) if user_book
+          render json: {message: "Updated Shelf Successfully.."}
+        else
+          render json: {message: "Not enough Information.. "}
         end
-       
-        
      end
 
     private 
