@@ -98,15 +98,28 @@ namespace :update_api do
             Rails.logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!..............................................#{item["volumeInfo"]["authors"]}...")
             #authors = item["volumeInfo"]["authors"]
 
-            Rails.logger.info(".....................#{authors}..................
-              #{info['title']}..........................#{info['imageLinks']['thumbnail']}.............#{info['description']}................#{info}")
+            # Rails.logger.info(".....................................
+            #   #{info['title']}..........................#{info['imageLinks']['thumbnail']}.............#{info['description']}................#{info}")
            
             # google_id = response.parsed_response['items'][item]['id']
+            if info.key?('description')
+            description = info['description']
+            else
+            description = nil
+            end
+
+            if info.key?('imageLinks')
+              if info['imageLinks'].key?('thumbnail')
+                image = info['imageLinks']['thumbnail']
+              end
+            else
+              image = "https://s3.ca-central-1.amazonaws.com/bucket4sree/no-cover-placeholder+(1).jpg"
+            end
             book = Book.create(isbn: isbn,
-                               bName: info['title'],
+                               bName: item["volumeInfo"]["title"],
                                bAuthor: item["volumeInfo"]["authors"],
-                               description: info['description'],
-                               image_url: info['imageLinks']['thumbnail'],
+                               description: description,
+                               image_url: image,
                                genre_id: id
                                )
             puts book.bName + ' created.'
