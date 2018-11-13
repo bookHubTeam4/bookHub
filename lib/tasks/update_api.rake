@@ -107,11 +107,19 @@ namespace :update_api do
             else
             description = nil
             end
+
+            if info.key?('imageLinks')
+              if info['imageLinks'].key?('thumbnail')
+                image = info['imageLinks']['thumbnail']
+              end
+            else
+              image = "https://s3.ca-central-1.amazonaws.com/bucket4sree/no-cover-placeholder+(1).jpg"
+            end
             book = Book.create(isbn: isbn,
                                bName: item["volumeInfo"]["title"],
                                bAuthor: item["volumeInfo"]["authors"],
                                description: description,
-                               image_url: info['imageLinks']['thumbnail'],
+                               image_url: image,
                                genre_id: id
                                )
             puts book.bName + ' created.'
