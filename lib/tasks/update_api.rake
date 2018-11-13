@@ -98,7 +98,7 @@ namespace :update_api do
             Rails.logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!..............................................#{item["volumeInfo"]["authors"]}...")
             #authors = item["volumeInfo"]["authors"]
 
-            Rails.logger.info(".....................#{authors}..................
+            Rails.logger.info(".....................................
               #{info['title']}..........................#{info['imageLinks']['thumbnail']}.............#{info['description']}................#{info}")
            
             # google_id = response.parsed_response['items'][item]['id']
