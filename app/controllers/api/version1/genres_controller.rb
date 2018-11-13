@@ -12,7 +12,9 @@ class Api::Version1::GenresController < ApplicationController
         message: "Cannot find user",
       }
     else
+      Rails.logger.info("......params[:genres] - #{params[:genres]}")
       genres = JSON.parse(params[:genres])
+      Rails.logger.info("......Json.parse response - #{genres}")
       user.add_genre(genres)
       render json: {
         message: "Successfully added favourite genres.",
