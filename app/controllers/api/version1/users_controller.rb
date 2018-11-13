@@ -46,7 +46,9 @@ class Api::Version1::UsersController < ApplicationController
           user_book = UserBook.find_by(user: user, book: book)
           Rails.logger.info("......user_book - #{user_book.id}")
           user_book.update(status: params[:status].to_i) if user_book
-          render json: {message: "Updated Shelf Successfully.."}
+          render json: {message: "Updated Shelf Successfully.",
+                        book_added: book,
+                        status: user_book.status}
         else
           render json: {message: "Not enough Information.. "}
         end
