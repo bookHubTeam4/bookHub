@@ -51,7 +51,7 @@ class User < ApplicationRecord
     end
 
     def self.get_user(token)
-      User.where(authentication_token: token).first if User.present?(token)
+      User.find_by(authentication_token: token) if User.present?(token)
     end
 
     def add_genre(genre_names)

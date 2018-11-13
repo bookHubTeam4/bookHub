@@ -63,17 +63,18 @@ class Book < ApplicationRecord
 
     def self.required_info(isbn)
         book = Book.api_call(isbn)
+        # binding.pry
         book_volume_info = book['volumeInfo']
-            authors = book_volume_info['authors'] if book
-            authors_string = authors.join(', ') if authors
-         { description: book_volume_info['description'],
-          bName: book_volume_info['title'],
-          isbn: isbn,
-          bAuthor: authors_string }
+        authors = book_volume_info['authors'] if book
+        authors_string = authors.join(', ') if authors
+        book_data = {description: book_volume_info['description'],
+                     bName: book_volume_info['title'],
+                     isbn: isbn,
+                     bAuthor: authors_string}
+          return book_data
     end
 
-    def self.add_new_book(book)
-        self.create(book)
-
+    def self.create_or_return_book(book)
+        Book.where(book).first_or_initialize
     end
 end
