@@ -90,7 +90,8 @@ namespace :update_api do
           if Book.exists?(isbn)
             Rails.logger.info(".................................................#{isbn}")
           else
-
+            Rails.logger.info("........................................................................................#{item}...")
+           
             info = item['volumeInfo']
             authors = info['authors']
 
