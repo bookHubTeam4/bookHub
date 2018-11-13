@@ -93,7 +93,7 @@ class BooksController < ApplicationController
             Rails.logger.info("///////////////////////////////////////////////////////#{genere.books}") 
           end
         
-        else
+        end
           @books_top        = Book.where('ny_times_list = ?', 'Mass Market Paperback')
           @books_travel     = Book.where('ny_times_list = ?', 'Travel')
           Rails.logger.info("///////////////////////////////////////////////////////#{@books_travel}") 
@@ -102,9 +102,9 @@ class BooksController < ApplicationController
           @books_animals    = Book.where('ny_times_list = ?', 'Animals')
           @books_education  = Book.where('ny_times_list = ?', 'Education')
           @books_nonfiction = Book.where('ny_times_list = ?', 'Hardcover Nonfiction')
-          @books = { 'Top Selling' => @books_top, 'Nonfiction' => @books_nonfiction, 'Travel' => @books_travel, 'Science' => @books_science, 'Business' => @books_business, 'Animals' => @books_animals, 'Education' => @books_education }
-
-        end
+          @book_ny = { 'Top Selling' => @books_top, 'Nonfiction' => @books_nonfiction, 'travel' => @books_travel, 'science' => @books_science, 'Business' => @books_business, 'Animals' => @books_animals, 'Education' => @books_education }
+          @books.merge!(@book_ny)
+        
       end
       render json: {book: @books, status: 'success'}
     end
