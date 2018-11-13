@@ -6,4 +6,8 @@ class Genre < ApplicationRecord
     def self.available_genres
         Genre.all.pluck(:name)
     end
+
+    def self.get_misc
+        Genre.find_by(name: misc)
+    end
 end

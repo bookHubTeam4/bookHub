@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :genres, only: [:index]
       post 'genre/add_user_genres', to:'genres#add_user_favourite_genres'
-
+      post 'user/save_book', to: 'users#add_to_shelf'
       delete 'sessions/sign_out'
      
 
