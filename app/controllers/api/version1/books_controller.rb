@@ -90,12 +90,13 @@ class BooksController < ApplicationController
         if @genreList.any?
           @genreList.each do |genere|
             @books[genere.name] = genere.books.limit(10)
-            Rails.logger.info(genere.books) 
+            Rails.logger.info("///////////////////////////////////////////////////////#{genere.books}") 
           end
         
         else
           @books_top        = Book.where('ny_times_list = ?', 'Mass Market Paperback')
           @books_travel     = Book.where('ny_times_list = ?', 'Travel')
+          Rails.logger.info("///////////////////////////////////////////////////////#{@books_travel}") 
           @books_science    = Book.where('ny_times_list = ?', 'Science')
           @books_business   = Book.where('ny_times_list = ?', 'Business Books')
           @books_animals    = Book.where('ny_times_list = ?', 'Animals')
