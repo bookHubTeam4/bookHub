@@ -8,6 +8,6 @@ class Genre < ApplicationRecord
     end
 
     def self.get_misc
-        Genre.find_by(name: misc)
+        Genre.find_by(name: "misc")
     end
 end
