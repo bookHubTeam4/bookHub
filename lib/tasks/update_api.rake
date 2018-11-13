@@ -96,7 +96,7 @@ namespace :update_api do
             Rails.logger.info("#####################################################################..............................................#{info}...")
 
             Rails.logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!..............................................#{item["volumeInfo"]["authors"]}...")
-            authors = item["volumeInfo"]["authors"]
+            #authors = item["volumeInfo"]["authors"]
 
             Rails.logger.info(".....................#{authors}..................
               #{info['title']}..........................#{info['imageLinks']['thumbnail']}.............#{info['description']}................#{info}")
@@ -104,7 +104,7 @@ namespace :update_api do
             # google_id = response.parsed_response['items'][item]['id']
             book = Book.create(isbn: isbn,
                                bName: info['title'],
-                               bAuthor: authors,
+                               bAuthor: item["volumeInfo"]["authors"],
                                description: info['description'],
                                image_url: info['imageLinks']['thumbnail'],
                                genre_id: id
