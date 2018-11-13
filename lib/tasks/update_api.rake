@@ -92,8 +92,9 @@ namespace :update_api do
           else
             Rails.logger.info("........................................................................................#{item}...")
            
-            info = item['volumeInfo']
-            authors = info['authors']
+            info = item["volumeInfo"]
+            Rails.logger.info("#####################################################################..............................................#{info}...")
+            authors = info["authors"]
 
             Rails.logger.info(".....................#{authors}..................
               #{info['title']}..........................#{info['imageLinks']['thumbnail']}.............#{info['description']}................#{info}")
