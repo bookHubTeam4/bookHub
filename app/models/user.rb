@@ -3,11 +3,11 @@ class User < ApplicationRecord
 
     # Assosiations ...
     has_many :user_books
-    has_many :books, through: :user_books
-    has_many :comments
-    has_many :ratings
+    has_many :books, through: :user_books, dependent: :destroy
+    has_many :comments, dependent: :destroy
+    has_many :ratings, dependent: :destroy
     has_many :user_genres
-    has_many :genres, through: :user_genres
+    has_many :genres, through: :user_genres, dependent: :destroy
 
     # Validations ...
     validates :email, presence: true, uniqueness: true
