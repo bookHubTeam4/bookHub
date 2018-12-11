@@ -56,8 +56,8 @@ class Api::Version1::UsersController < ApplicationController
 
      def get_user_shelf
         user = User.get_user(params[:user_token])
-        Rails.logger.info("......user - #{user.id}")
         if user
+            Rails.logger.info("......user - #{user.id}")
             shelf = {}
             user_shelf = []
             user.books.each do |book|
