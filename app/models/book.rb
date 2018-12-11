@@ -79,4 +79,11 @@ class Book < ApplicationRecord
     def self.create_or_return_book(book)
         Book.where(book).first_or_initialize
     end
+
+    def self.get_book_image(isbn)
+        book = Book.api_call(isbn)
+        book_volume_info = book['volumeInfo']
+        book_volume_info['imageLinks']['thumbnail']
+    end
+    
 end

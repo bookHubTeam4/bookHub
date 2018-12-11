@@ -61,7 +61,7 @@ class Api::Version1::UsersController < ApplicationController
             shelf = {}
             user_shelf = []
             user.books.each do |book|
-                shelf = {isbn: book.isbn}
+                shelf = {isbn: book.isbn, name: book.bName, image_url: Book.get_book_image(book.isbn)}
                 shelf[:status] = user.user_books.find_by(book_id: book.id).status
             end
             user_shelf << shelf
