@@ -54,6 +54,32 @@ class Api::Version1::UsersController < ApplicationController
         end
      end
 
+     def get_user_shelf
+        user = User.get_user(params[:user_token])
+        Rails.logger.info("......user - #{user.id}")
+        if user
+            shelf = {}
+            user_shelf = []
+            user.books.each do |book|
+                shelf = {isbn: book.isbn}
+                shelf[:status] = user.user_books.find_by(book_id: book.id).status
+            end
+            user_shelf << shelf
+            render json: {user_shelf: user_shelf}
+        else
+            render json: {message: "Please provide a valid user token!."}
+        end
+     end
+
+     def update
+       user = User.get_user(params[:authentication_token])
+       user.update(firstName: params[:firstName],
+                   lastName: params[:lastName],
+                   password: params[:password])
+       render json: { message: "User updated successfully..",
+                      user: user}
+     end
+
     private 
     def user_params
         params.permit(:firstName, :lastName, :email, :password, :provider)
