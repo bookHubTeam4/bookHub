@@ -76,7 +76,7 @@ class BooksController < ApplicationController
                 Rails.logger.info(".................................................#{user.books}")
                 if user.books.include?(Book.book_selector(@isbn))
                   
-                  book_status = user.user_books.find(book_id: Book.book_selector(@isbn).id)
+                  book_status = user.user_books.find_by(book_id: Book.book_selector(@isbn).id)
                   Rails.logger.info(".................................................#{book_status}")
                 end
               
