@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'version1' do
-      resources :books, only: [:index, :show],  param: :name
+      resources :books, only: [:index, :show]
       resources :users, only: [:create, :update]
       resources :sessions, only: [:create]
       resources :genres, only: [:index]
