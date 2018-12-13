@@ -55,7 +55,7 @@ class BooksController < ApplicationController
     
     end
 
-    def show
+    def show_book
         @isbn = params[:name]
         #book_data = {}
             Rails.logger.info(params[:name])          
