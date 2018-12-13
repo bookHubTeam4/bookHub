@@ -73,7 +73,7 @@ class BooksController < ApplicationController
               #check if the user exists
               if user 
                 #check if the book is in the user books list
-                Rails.logger.info(".................................................#{@user.books}")
+                Rails.logger.info(".................................................#{user.books}")
                 if user.books.include?(Book.book_selector(@isbn))
                   
                   book_status = user.user_books.find(book: Book.book_selector(@isbn))
