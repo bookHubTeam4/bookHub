@@ -82,13 +82,16 @@ class Book < ApplicationRecord
 
     def self.get_book_image(isbn)
         book = Book.api_call(isbn)
+
         book_volume_info = book['volumeInfo']
+        Rails.logger.info(".................................................#{book['volumeInfo']}")
         book_volume_info['imageLinks']['thumbnail']
     end
 
 
     def self.get_author(isbn)
         book = Book.api_call(isbn)
+        Rails.logger.info(".................................................#{book['volumeInfo']}")
         authors = book['volumeInfo']['authors'] if book
     end
     

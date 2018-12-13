@@ -64,7 +64,9 @@ class Api::Version1::UsersController < ApplicationController
             Rails.logger.info("................................book - #{user.books}")
             user.books.each do |book|
                 Rails.logger.info("......book_1 - #{book.inspect}")
+                
                 shelf = {isbn: book.isbn, name: book.bName, author: Book.get_author(book.isbn), image_url: Book.get_book_image(book.isbn)}
+                Rails.logger.info("......book_1 - #{shelf}")
                 shelf[:status] = user.user_books.find_by(book_id: book.id).status
                 shelf[:average_rating] = rand(2.5 .. 4.5).round(1)
                 user_shelf << shelf
