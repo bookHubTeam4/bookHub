@@ -15,6 +15,8 @@ class Book < ApplicationRecord
         google_key = Figaro.env.google_key
         book_response = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=isbn=#{isbn}&key=#{google_key}")
         book = book_response.parsed_response['items'][0]
+
+        Rails.logger.info(".................................................#{book}")
         return book if book_response
 
       end
