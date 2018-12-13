@@ -74,10 +74,15 @@ class Api::Version1::UsersController < ApplicationController
      def update
        user = User.get_user(params[:authentication_token])
        user.update(firstName: params[:firstName],
-                   lastName: params[:lastName],
-                   password: params[:password])
+                   lastName: params[:lastName])
+         Rails.logger.info("......params[:genres] - #{params[:genres]}")
+        genres = JSON.parse(params[:genres])
+        Rails.logger.info("......Json.parse response - #{genres}")
+       user.add_genre(genres)
+       Rails.logger.info(".................................................#{user.full_data}")
+
        render json: { message: "User updated successfully..",
-                      user: user}
+                      user: user.full_data}
      end
 
     private 
