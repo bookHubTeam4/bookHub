@@ -68,16 +68,16 @@ class BooksController < ApplicationController
             book_status = nil
             #check if the book exist else book has not been data base
             if Book.book_selector(@isbn)
-              Rails.logger.info(".................................................#{Book.book_selector(@isbn)}"
-              @user = User.get_user(params[:token])
+              Rails.logger.info(".................................................#{Book.book_selector(@isbn)}")
+              user = User.get_user(params[:token])
               #check if the user exists
-              if @user 
+              if user 
                 #check if the book is in the user books list
-                Rails.logger.info(".................................................#{@user.books}"
-                if @user.books.include?(Book.book_selector(@isbn))
+                Rails.logger.info(".................................................#{@user.books}")
+                if user.books.include?(Book.book_selector(@isbn))
                   
-                  book_status = @user.user_books.find(book: Book.book_selector(@isbn))
-                  Rails.logger.info(".................................................#{book_status}"
+                  book_status = user.user_books.find(book: Book.book_selector(@isbn))
+                  Rails.logger.info(".................................................#{book_status}")
                 end
               
               end
