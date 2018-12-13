@@ -38,7 +38,7 @@ class Api::Version1::UsersController < ApplicationController
           Rails.logger.info("......user - #{user.id}")
           book = Book.exists?(params[:isbn])
           unless book
-            book_info = Book.required_info(params[:isbn])   
+            book_info = Book.required_info(params[:isbn])
             book = Book.create(book_info.merge(genre_id: Genre.get_misc.id))
           end 
           Rails.logger.info("......book - #{book.id}")         
@@ -61,10 +61,11 @@ class Api::Version1::UsersController < ApplicationController
             shelf = {}
             user_shelf = []
             user.books.each do |book|
-                shelf = {isbn: book.isbn, name: book.bName, image_url: Book.get_book_image(book.isbn)}
+                shelf = {isbn: book.isbn, name: book.bName, author: Book.get_author(book.isbn), image_url: Book.get_book_image(book.isbn)}
                 shelf[:status] = user.user_books.find_by(book_id: book.id).status
+                shelf[:average_rating] = rand(2.5 .. 4.5).round(1)
+                user_shelf << shelf
             end
-            user_shelf << shelf
             render json: {user_shelf: user_shelf}
         else
             render json: {message: "Please provide a valid user token!."}

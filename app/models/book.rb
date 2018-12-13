@@ -85,5 +85,11 @@ class Book < ApplicationRecord
         book_volume_info = book['volumeInfo']
         book_volume_info['imageLinks']['thumbnail']
     end
+
+
+    def self.get_author(isbn)
+        book = Book.api_call(isbn)
+        authors = book['volumeInfo']['authors'] if book
+    end
     
 end
