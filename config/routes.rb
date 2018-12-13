@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'version1' do
-      resources :books, only: [:index, :show],  param: :name
+      
       resources :users, only: [:create, :update]
       resources :sessions, only: [:create]
       resources :genres, only: [:index]
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
      post 'book/search' => 'books#search_book', param: :search
      post 'book/recomendation' => 'books#book_list'
      get 'user/shelf' => 'user#get_user_shelf'
+     get '/books' => 'books#show_book'
     #  post 'auth/request', to:'authorization#get_authorization'
      post 'auth/request', to: 'users#oauth_signup'
     end

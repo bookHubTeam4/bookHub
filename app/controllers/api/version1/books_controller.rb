@@ -55,7 +55,7 @@ class BooksController < ApplicationController
     
     end
 
-    def show
+    def show_book
         @isbn = params[:name]
         #book_data = {}
             Rails.logger.info(params[:name])          
@@ -65,6 +65,24 @@ class BooksController < ApplicationController
             Rails.logger.info(book_volume_info['authors'])
             authors_string = authors.join(', ') if authors
             google_id = book['id']
+            book_status = nil
+            #check if the book exist else book has not been data base
+            if Book.book_selector(@isbn)
+              Rails.logger.info(".................................................#{Book.book_selector(@isbn)}")
+              user = User.get_user(params[:token])
+              #check if the user exists
+              if user 
+                #check if the book is in the user books list
+                Rails.logger.info(".................................................#{user.books}")
+                if user.books.include?(Book.book_selector(@isbn))
+                  
+                  book_status = user.user_books.find_by(book_id: Book.book_selector(@isbn).id).status
+                  Rails.logger.info(".................................................#{book_status}")
+                end
+              
+              end
+            
+            end
             book_data = { title: book_volume_info['title'],
                           isbn: @isbn,
                           author: authors_string,
@@ -75,7 +93,9 @@ class BooksController < ApplicationController
                           page_count: book_volume_info['pageCount'],
                           average_rating: book_volume_info['averageRating'],
                           published_date: book_volume_info['publishedDate'],
-                          publisher: book_volume_info['publisher'] }
+                          publisher: book_volume_info['publisher'] ,
+                          book_status: book_status
+                        }
 
         render json: {book: book_data, status: 'success'}
 
