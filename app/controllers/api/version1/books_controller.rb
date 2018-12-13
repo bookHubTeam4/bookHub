@@ -13,7 +13,7 @@ class BooksController < ApplicationController
       google_key = Figaro.env.google_key
 
       goog_response = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=#{params[:search]}&key=AIzaSyCzRLuhzYmdLVsVinQopkmunyvI-ae6I6I")
-      Rails.logger.info(".................................................#{book}")
+      Rails.logger.info(".................................................#{goog_response}")
       @google_items = goog_response.parsed_response['items']
 
       if @google_items
